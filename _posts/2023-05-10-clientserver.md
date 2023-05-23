@@ -1,8 +1,8 @@
 ---
 layout: single
 title: "Client & Server"
-categories: coding
-tag: [python, blog, spring]
+categories: http
+tag: [client, server]
 toc: true
 author_profile: false
 sidebar:
