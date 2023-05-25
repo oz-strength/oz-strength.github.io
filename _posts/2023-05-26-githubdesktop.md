@@ -30,3 +30,18 @@ ex) 프로젝트 생성 시 바탕화면에 springTest라는 폴더를 생성
 
 - https://www.toptal.com/developers/gitignore 사이트로 가서 eclipse, java, window 등의 키워드로 git에 올릴필요 없는 항목들을 긁어와서 복붙한다.
 
+<hr>
+
+### <span style="color:orange">gitignore가 적용이 안될 경우</span>
+
+**git rm -r --cached .** 명령어를 통해 git의 캐시를 삭제한 후 커밋.
+
+```
+git rm -r --cached .
+git add .
+git commit -m "clear git cache"
+git push
+```
+
+
+
