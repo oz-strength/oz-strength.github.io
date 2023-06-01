@@ -12,7 +12,7 @@ typora-root-url: ../
 
 # _MVC 패턴_
 
-### _1. 관심사의 분리 Seperation of Concerns_
+### 1. 관심사의 분리 Seperation of Concerns
 
 OOP 5대 설게원칙 - SOLID
 
@@ -24,7 +24,7 @@ OOP 5대 설게원칙 - SOLID
         2. 변하는 것, (자주)변하지 않는 것 (common / uncommon)
         3. 공통(중복)코드
 
-### _2. 공통 코드의 분리 - 입력의 분리_
+### 2. 공통 코드의 분리 - 입력의 분리
 
 *분리 전*
 
@@ -98,7 +98,7 @@ OOP 5대 설게원칙 - SOLID
 	 cal.set(year, month -1 , day);
 ```
 
-### _3. 출력(view)의 분리 - 변하는 것과 변하지 않는 것의 분리_
+### 3. 출력(view)의 분리 - 변하는 것과 변하지 않는 것의 분리
 
 ```java
  // 2. 처리
@@ -127,6 +127,8 @@ OOP 5대 설게원칙 - SOLID
 
 입력은 DispatcherServlet, 처리는 Controller, 출력은 View, 처리 결과 데이터를 주고 받을 수 있는 객체인 Model
 
-​					*단순화한 그림*
+![image-20230601092703398](/images/2023-05-26-mvcpattern/image-20230601092703398.png)
 
-![image-20230526034555606](/images/2023-05-26-mvcpattern/image-20230526034555606.png)
+### 4. MVC 패턴
+
+![image-20230601093133169](/images/2023-05-26-mvcpattern/image-20230601093133169.png)
