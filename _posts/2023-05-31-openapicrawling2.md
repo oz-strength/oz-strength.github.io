@@ -263,7 +263,7 @@ for item in data:
 <div class="alert alert-block" style="border: 2px solid #E65100;background-color:#FFF3E0;padding:10px">
 <font size="3em" style="color:#BF360C;">Open API 는 향후에도 데이터를 기술적으로 공유하는 가장 일반적인 방법이 될 수 있습니다<br> 그래서, 본 강의를 통해 이런 부분도 꼭 경험하시고, 또 찾고자 하시는 데이터가 있으면, 관련 Open API 를 검색하고, <br> 각 Open API 마다 사용법을 가이드하고 있으므로, 이를 이해하고 테스트하실 수 있는 역량도 갖추시는데 도움이 되었으면 좋겠습니다</font><br>
 </div>
-
+*[출처] 인프런 - 잔재미 코딩 (데이터분석기초) *
 
 ```python
 import requests
