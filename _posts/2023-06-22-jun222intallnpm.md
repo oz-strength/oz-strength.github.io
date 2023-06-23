@@ -1,8 +1,8 @@
 ---
 layout: single
 title: "Node.js - Install NPM"
-categories: javascript
-tag: [vscode, node]
+categories: nodejs
+tag: [vscode, javascript]
 toc: true
 author_profile: false
 sidebar:
