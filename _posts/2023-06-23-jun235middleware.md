@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Node.js - Express"
+title: "Node.js - MiddleWare"
 categories: nodejs
 tag: [vscode, javascript]
 toc: true
@@ -506,9 +506,9 @@ app.listen(3000, () => {
 
 # views/sessionData.html
 
-```html
+![image-20230623183607418](/images/2023-06-23-jun235middleware/image-20230623183607418.png)
 
-```
+
 
 # views/upload.html
 
