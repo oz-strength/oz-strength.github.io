@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Node.js - 02_Install NPM"
+title: "Node.js - Install NPM"
 categories: javascript
 tag: [vscode, node]
 toc: true
