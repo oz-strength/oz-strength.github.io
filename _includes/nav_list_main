@@ -72,14 +72,14 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "react" %}
-                        <li><a href="/categories/frontend" class="">리액트 ({{category[1].size}})</a></li>
+                        <li><a href="/categories/react" class="">리액트 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "nodejs" %}
-                        <li><a href="/categories/frontend" class="">노드 ({{category[1].size}})</a></li>
+                        <li><a href="/categories/nodejs" class="">노드 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
