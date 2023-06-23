@@ -36,23 +36,23 @@ typora-root-url: ../
 //      app.use('/abc', 미들웨어) : abc로 시작하는 요청에서 미들웨어 실행
 //      app.post('/abc', 미들웨어) : abc로 시작하는 post요청에서 미들웨어 실행
 
-const express = require('express');
+const express = require("express");
 const app = express();
 
 app.use((req, res, next) => {
-  console.log('모든 요청에 다 실행 됨!');
+  console.log("모든 요청에 다 실행 됨!");
   next();
 });
 
 app.get(
-  '/',
+  "/",
   (req, res, next) => {
-    console.log('GET / 요청에서만 실행 됨');
+    console.log("GET / 요청에서만 실행 됨");
     next();
   },
   (req, res) => {
     // 여기에서 에러가 발생!
-    throw new Error('에러는 에러처리 미들웨어로 간다!');
+    throw new Error("에러는 에러처리 미들웨어로 간다!");
   }
 );
 
@@ -67,9 +67,8 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3000, () => {
-  console.log('3000번 포트입니다~');
+  console.log("3000번 포트입니다~");
 });
-
 ```
 
 # app2.js
@@ -82,18 +81,18 @@ app.listen(3000, () => {
 // dotenv 제외한 다른 패키지들은 미들웨어이다!
 // dotenv는 서버의 환경변수를 뜻하고, 이를 관리해줌
 
-const express = require('express');
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const dotenv = require('dotenv');
-const path = require('path');
+const express = require("express");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const dotenv = require("dotenv");
+const path = require("path");
 
 dotenv.config();
 const app = express();
 
 // 1. morgan - 요청과 응답에 대한 정보를 콘솔에 알려줌
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 // GET / 200 5.759 ms - 23 는 각각 [요청방식] [주소] [상태코드] [응답속도] - [응답 바이트]
 // 를 나타내고 있음
 
@@ -102,8 +101,8 @@ app.use(morgan('dev'));
 // });
 
 // app.get => html 파일 불러오기
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/index.html"));
 });
 
 // 'css' 폴더를 하나 만들어서 => 그 안에 index.css 파일 만들고
@@ -115,7 +114,7 @@ app.get('/', (req, res) => {
 // express 객체 안에 있는 기능이라서 꺼내서 쓰기만 하면 됨
 // app.use('요청경로', express.static('실제 경로')); 로 사용
 
-app.use('/', express.static(path.join(__dirname, 'css'))); // css폴더를 지정!
+app.use("/", express.static(path.join(__dirname, "css"))); // css폴더를 지정!
 // 주소값 뒤에 /index.css를 쳐보면 해당 코드가 나옴!
 // 실제 폴더경로에는 css가 들어있지만, 요청 주소에는 css가 안들어가는데,
 // 서버의 폴더 경로와 요청 경로가 달라서 외부인이 이 서버의 구조를
@@ -124,9 +123,8 @@ app.use('/', express.static(path.join(__dirname, 'css'))); // css폴더를 지�
 // 브라우저에서 접근할 수 있게 됨!
 
 app.listen(3000, () => {
-  console.log('3000번 포트에 연결됨');
+  console.log("3000번 포트에 연결됨");
 });
-
 ```
 
 # app3.js
@@ -152,17 +150,17 @@ app.listen(3000, () => {
 
 // npm install cookie-parser nunjucks chokidar => 설치
 
-const express = require('express');
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const nunjucks = require('nunjucks');
+const express = require("express");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const nunjucks = require("nunjucks");
 
 const app = express();
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(cookieParser()); // get방식 요청이 오면 uri변수들이
 // 파싱돼서 req.cookies객체 저장됨
-app.set('view engine', 'html');
-nunjucks.configure('views', {
+app.set("view engine", "html");
+nunjucks.configure("views", {
   express: app,
   watch: true,
 });
@@ -170,39 +168,36 @@ nunjucks.configure('views', {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   const { user } = req.cookies;
   if (user) {
-    res.render('login', { user });
+    res.render("login", { user });
   }
 
-  res.render('index');
+  res.render("index");
 });
 
-app.post('/', (req, res) => {
+app.post("/", (req, res) => {
   const { name } = req.body;
   // 쿠키 생성
   res
-    .cookie('user', name, {
+    .cookie("user", name, {
       expires: new Date(Date.now() + 900000), // 만료기간
       httpOnly: true, // true 설정 시 자바스크립트로 쿠키에 접근할 수 없음
       secure: true, // HTTPS 통신일때만 쿠키 전송하겠다!
     })
-    .redirect('/');
+    .redirect("/");
 });
 
-app.get('/delete', (req, res) => {
+app.get("/delete", (req, res) => {
   // 쿠키 삭제
-  res.clearCookie('user').redirect('/');
+  res.clearCookie("user").redirect("/");
 });
 
 app.listen(3000, () => {
-  console.log('서버 실행 중');
+  console.log("서버 실행 중");
 });
-
 ```
-
-
 
 # app4.js
 
@@ -222,15 +217,15 @@ app.listen(3000, () => {
 
 // npm install express-session => 설치
 
-const express = require('express');
-const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
-const nunjucks = require('nunjucks');
-const session = require('express-session');
+const express = require("express");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const nunjucks = require("nunjucks");
+const session = require("express-session");
 
 const app = express();
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 app.use(cookieParser());
 app.use(
@@ -239,84 +234,81 @@ app.use(
     // 다시 저장할지 여부
     saveUninitialized: false, // 세션에 저장할 내역이 없더라도
     // 세션을 저장할지 여부
-    secret: 'secretkk', // 쿠키 암호화
+    secret: "secretkk", // 쿠키 암호화
     cookie: {
       // 쿠키 설정과 동일
       httpOnly: true,
       secure: false,
     },
-    name: 'oz-cookie', // 세션쿠키 이름 (connect.sid가 기본값)
+    name: "oz-cookie", // 세션쿠키 이름 (connect.sid가 기본값)
     // store : 세션 저장소, 메모리가 기본값
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'html');
-nunjucks.configure('views', {
+app.set("view engine", "html");
+nunjucks.configure("views", {
   express: app,
   watch: true,
 });
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   const { user } = req.session; // req.session : 세션값들을 다 볼 수 있음
   if (user) {
-    res.render('login', { user });
+    res.render("login", { user });
     return;
   }
-  res.render('index');
+  res.render("index");
 });
 
 // 이름 등록
-app.post('/', (req, res) => {
+app.post("/", (req, res) => {
   const { name } = req.body;
   req.session.user = name;
-  res.redirect('/');
+  res.redirect("/");
   // 개발자모드 - Application - Storage - Cookies에서 확인할 수 있음
 });
 
 // 세션 삭제
-app.get('/delete', (req, res) => {
+app.get("/delete", (req, res) => {
   req.session.destroy(); // req.session.destroy() : 세션 모두 제거
-  res.redirect('/');
+  res.redirect("/");
 });
 
 // 세션 데이터 추가
-app.get('/addSession', (req, res) => {
-  req.session.addData = 'addData';
+app.get("/addSession", (req, res) => {
+  req.session.addData = "addData";
   console.log(req.sessionID); // req.sessionID : 세션 아이디 확인
   // (세션 쿠키의 value)
-  res.redirect('/');
+  res.redirect("/");
 });
 
 // 세션 데이터 보기
-app.get('/lookSession', (req, res) => {
-  res.render('sessionData', { sessions: req.session });
+app.get("/lookSession", (req, res) => {
+  res.render("sessionData", { sessions: req.session });
 });
 
 app.listen(3000, () => {
-  console.log('3000번 포트에서 작동 중!');
+  console.log("3000번 포트에서 작동 중!");
 });
-
 ```
-
-
 
 # app5.js
 
 ```js
-const express = require('express');
-const morgan = require('morgan');
-const nunjucks = require('nunjucks');
-const bodyParser = require('body-parser');
+const express = require("express");
+const morgan = require("morgan");
+const nunjucks = require("nunjucks");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'html');
-nunjucks.configure('views', {
+app.set("view engine", "html");
+nunjucks.configure("views", {
   express: app,
   watch: true,
 });
@@ -324,21 +316,21 @@ nunjucks.configure('views', {
 // views 폴더에 write.html 만들어서
 // form안에 제품명 / 가격 / 설명 입력 버튼눌렀을 때 post방식 요청
 
-app.get('/', (req, res) => {
-  res.send('kkk');
+app.get("/", (req, res) => {
+  res.send("kkk");
 });
 
-app.get('/products/write', (req, res) => {
-  res.render('write');
+app.get("/products/write", (req, res) => {
+  res.render("write");
 });
 
-app.post('/products/write', (req, res) => {
+app.post("/products/write", (req, res) => {
   // res.send(req.body);
   res.send(req.body.name);
 });
 
 app.listen(3000, () => {
-  console.log('3000번 포트에서 작동중!');
+  console.log("3000번 포트에서 작동중!");
 });
 
 // body-parser  ?
@@ -352,10 +344,7 @@ app.listen(3000, () => {
 // false값이면 querystring 모듈을 사용해서 데이터를 해석하고,
 // true값이면 qs모듈을 사용해서 데이터를 해석함
 //  => 둘 다 비슷한데 qs모듈이 조금 더 기능이 확장되었음
-
 ```
-
-
 
 # app6.js
 
@@ -370,24 +359,24 @@ app.listen(3000, () => {
 // filename : 저장할 파일명
 // Limits : 파일 개수나 파일 사이즈를 제한할 수 있음
 
-const express = require('express');
-const morgan = require('morgan');
-const nunjucks = require('nunjucks');
-const bodyParser = require('body-parser');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
+const express = require("express");
+const morgan = require("morgan");
+const nunjucks = require("nunjucks");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
 // 이미지 불러오기
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'html');
-nunjucks.configure('views', {
+app.set("view engine", "html");
+nunjucks.configure("views", {
   express: app,
   watch: true,
 });
@@ -397,10 +386,10 @@ nunjucks.configure('views', {
 // 없다면 직접 만들어주거나, fs 모듈로 서버를 시작할 때 생성하는 방식이 있음
 
 try {
-  fs.readdirSync('uploads'); // 폴더 확인
+  fs.readdirSync("uploads"); // 폴더 확인
 } catch (err) {
-  console.error('uploads 폴더가 없습니다. 폴더를 생성합니다.');
-  fs.mkdirSync('uploads'); // 폴더 생성
+  console.error("uploads 폴더가 없습니다. 폴더를 생성합니다.");
+  fs.mkdirSync("uploads"); // 폴더 생성
 }
 
 const upload = multer({
@@ -408,7 +397,7 @@ const upload = multer({
     // 저장할 공간 확보 : 하드디스크에 저장
     destination(req, file, done) {
       // 저장 위치
-      done(null, 'uploads'); // uploads라는 폴더 안에 저장
+      done(null, "uploads"); // uploads라는 폴더 안에 저장
     },
     filename(req, file, done) {
       // 파일명을 어떤 이름으로 업로드할지
@@ -432,10 +421,7 @@ const upload = multer({
 // 현재 설정으로는 upload 폴더에 [파일명.확장자] 파일명으로 업로드 될 것!
 // Limits 속성에는 업로드에 대한 제한사항을 걸어두었음
 // => 파일 크기를 10 MB로 제한한 상태
-
 ```
-
-
 
 # views/index.html
 
@@ -461,10 +447,7 @@ const upload = multer({
     </form>
   </body>
 </html>
-
 ```
-
-
 
 # views/login.html
 
@@ -483,10 +466,7 @@ const upload = multer({
     <div><a href="/delete">로그아웃</a></div>
   </body>
 </html>
-
 ```
-
-
 
 # views/sessionData.html
 
@@ -501,19 +481,16 @@ const upload = multer({
   <body>
     세션 데이터
     <ul>
-      {% for key, value in sessions %}
-      <li>{{key}} : {{value}}</li>
-      {% endfor %}
+      <!-- {% for key, value in sessions %} -->
+      <!-- <li>{{key}} : {{value}}</li> -->
+      <!-- {% endfor %} -->
     </ul>
     <div>
       <a href="/">홈으로</a>
     </div>
   </body>
 </html>
-
 ```
-
-
 
 # views/write.html
 
@@ -558,7 +535,6 @@ const upload = multer({
     </form>
   </body>
 </html>
-
 ```
 
 # views/upload.html
@@ -581,10 +557,7 @@ const upload = multer({
     </form>
   </body>
 </html>
-
 ```
-
-
 
 # css/index.css
 
@@ -593,8 +566,6 @@ h1 {
   background-color: aquamarine;
 }
 ```
-
-
 
 # index.html
 
@@ -613,12 +584,7 @@ h1 {
     <h1>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</h1>
   </body>
 </html>
-
 ```
-
-
-
-
 
 # package.json
 
@@ -629,7 +595,7 @@ h1 {
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app6.js" 
+    "start": "node app6.js"
   },
   "keywords": [],
   "author": "",
@@ -639,18 +605,4 @@ h1 {
     "multer": "^1.4.4"
   }
 }
-
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
