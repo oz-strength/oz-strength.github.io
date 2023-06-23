@@ -481,9 +481,9 @@ const upload = multer({
   <body>
     세션 데이터
     <ul>
-      <!-- {% for key, value in sessions %} -->
-      <!-- <li>{{key}} : {{value}}</li> -->
-      <!-- {% endfor %} -->
+      {% for key, value in sessions %}
+      <li>{{key}} : {{value}}</li>
+      {% endfor %}
     </ul>
     <div>
       <a href="/">홈으로</a>
