@@ -89,11 +89,10 @@ _단점_
 
 
 <hr>
+### 실행
 
-_실행_
-
-1. C:\elasticsearch-7.12.0-windows-x86_64\elasticsearch-7.12.0\bin 에서 elasticsearch.bat 파일 실행
-2. 상위 폴더(C:\elasticsearch-7.12.0-windows-x86_64\elasticsearch-7.12.0)에서 cmd 실행 & curl -X GET "localhost:9200/?pretty" 명령어 실행
+1. C:\elasticsearch-7.12.0\bin 에서 elasticsearch.bat 파일 실행
+2. 상위 폴더(C:\elasticsearch-7.12.0)에서 cmd 실행 & ```curl -X GET "localhost:9200/?pretty" ```명령어 실행
 3. 응답 결과를 JSON 형태로 보내는데, URL뒤에 ?pretty 를 추가하면 가독성이 좋은 형태로 결과 제공 ! 
    1. - curl: 다양한 통신 프로토콜을 지원하여 데이터를 전송할 수 있는 소프트웨어 
       - 주로 사용되는 옵션은  
@@ -104,8 +103,7 @@ _실행_
 4. 크롬에 localhost:9200 으로 접속해서 실행되는지 확인! 
 
 <hr>
-
-_키바나 설치_
+### 키바나 설치
 
 ES의 관리, 모니터링, 솔루션을 총괄하는 메인 UI 이다!
 
@@ -113,7 +111,7 @@ ES에서 제공되는 시계열 데이터나 위치 분석같은 다양한 분�
 
 
 
-_실행_
+### 실행 
 
 1. bin 경로안까지 가서 kibana.bat 파일 실행 
 2. 정상적으로 켜졌으면 크롬에서 localhost:5601 주소로 요청!
@@ -124,8 +122,7 @@ _실행_
    2. Explore on my own : 홈으로 가기 
 
 <hr>
-
-_엘라스틱 서치 Basic_
+### 엘라스틱 서치 Basic
 
 ES의 모든 요청과 응답은 REST API 형태로 제공됨
 
@@ -183,7 +180,8 @@ PUT은 생성이나 수정을 위한 HTTP 메소드!
 
 <hr>
 
-_Document CRUD_
+### Document CRUD
+
 
 1. 도큐먼트 생성
 
@@ -311,7 +309,6 @@ _update라는 엔드포인트를 추가해 특정 필드의 값만 업데이트 
 
 
 <hr>
-
 
 
 
